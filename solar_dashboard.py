@@ -130,7 +130,104 @@ if selection == "Summary Dashboard":
     st.header("Dashboard")
     
 if selection == "Visualization & Analysis":
-    st.header("Interactive Visualization")
+    st.header("🌞 Interactive Visualization & Analysis")
+    st.markdown("Explore daily and seasonal power generation trends, weather relationships, and inverter-level performance.")
+
+    # --- Sidebar Filters ---
+    st.sidebar.subheader("📅 Filter Controls")
+    date_range = st.sidebar.date_input(
+        "Select Date Range",
+        [merged_df['DATE_TIME'].min().date(), merged_df['DATE_TIME'].max().date()]
+    )
+    inverter_filter = st.sidebar.multiselect(
+        "Select Inverter (SOURCE_KEY)",
+        options=merged_df['SOURCE_KEY'].unique(),
+        default=merged_df['SOURCE_KEY'].unique()
+    )
+
+    # Apply filters
+    filtered_df = merged_df[
+        (merged_df['DATE_TIME'].dt.date >= date_range[0]) &
+        (merged_df['DATE_TIME'].dt.date <= date_range[1]) &
+        (merged_df['SOURCE_KEY'].isin(inverter_filter))
+    ]
+
+    # --- Daily Trend Visualization ---
+    st.subheader("☀️ Daily Power Generation Trend")
+    daily_gen = filtered_df.groupby('DATE', as_index=False)['AC_POWER'].sum()
+    fig_daily = px.line(
+        daily_gen,
+        x='DATE',
+        y='AC_POWER',
+        title="Daily AC Power Generation",
+        labels={'AC_POWER': 'Total AC Power (kW)', 'DATE': 'Date'},
+        markers=True
+    )
+    st.plotly_chart(fig_daily, use_container_width=True)
+
+    # --- Hourly Pattern (Average by Hour) ---
+    st.subheader("🕒 Average Hourly Power Generation Pattern")
+    hourly_pattern = filtered_df.groupby('HOUR', as_index=False)['AC_POWER'].mean()
+    fig_hourly = px.line(
+        hourly_pattern,
+        x='HOUR',
+        y='AC_POWER',
+        title="Average Hourly AC Power Generation",
+        labels={'AC_POWER': 'Average AC Power (kW)', 'HOUR': 'Hour of Day'},
+        markers=True
+    )
+    st.plotly_chart(fig_hourly, use_container_width=True)
+
+    # --- Seasonal Trend ---
+    st.subheader("🌤️ Monthly Power Generation Trend")
+    monthly_gen = filtered_df.groupby('MONTH_NAME', as_index=False)['AC_POWER'].sum()
+    fig_month = px.bar(
+        monthly_gen,
+        x='MONTH_NAME',
+        y='AC_POWER',
+        title="Monthly AC Power Generation",
+        labels={'AC_POWER': 'Total AC Power (kW)', 'MONTH_NAME': 'Month'},
+    )
+    st.plotly_chart(fig_month, use_container_width=True)
+
+    # --- Weather vs Power ---
+    st.subheader("🌡️ Relationship Between Weather and Power Output")
+    fig_weather = px.scatter(
+        filtered_df,
+        x='IRRADIATION',
+        y='AC_POWER',
+        color='MODULE_TEMPERATURE',
+        title="Irradiation vs AC Power (Color = Module Temperature)",
+        labels={'IRRADIATION': 'Irradiation (W/m²)', 'AC_POWER': 'AC Power (kW)', 'MODULE_TEMPERATURE': 'Module Temp (°C)'},
+        trendline="ols"
+    )
+    st.plotly_chart(fig_weather, use_container_width=True)
+
+    # --- Inverter-level Comparison ---
+    st.subheader("⚡ Inverter-level Performance")
+    inverter_perf = filtered_df.groupby('SOURCE_KEY', as_index=False)['AC_POWER'].sum()
+    fig_inverter = px.bar(
+        inverter_perf,
+        x='SOURCE_KEY',
+        y='AC_POWER',
+        title="Total AC Power by Inverter",
+        labels={'SOURCE_KEY': 'Inverter ID', 'AC_POWER': 'Total AC Power (kW)'},
+    )
+    st.plotly_chart(fig_inverter, use_container_width=True)
+
+    # --- Efficiency vs Temperature ---
+    st.subheader("♻️ Efficiency vs Module Temperature")
+    fig_efficiency = px.scatter(
+        filtered_df,
+        x='MODULE_TEMPERATURE',
+        y='EFFICIENCY',
+        color='IRRADIATION',
+        title="Efficiency vs Module Temperature (Color = Irradiation)",
+        labels={'MODULE_TEMPERATURE': 'Module Temp (°C)', 'EFFICIENCY': 'Efficiency (%)', 'IRRADIATION': 'Irradiation (W/m²)'},
+        trendline="ols"
+    )
+    st.plotly_chart(fig_efficiency, use_container_width=True)
+
 
 # Footer
 st.markdown("---")
