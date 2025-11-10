@@ -4,11 +4,11 @@ Solar Energy Analysis and Optimization Dashboard
 """
 
 import streamlit as st
-from data_loader import load_data
-from ui_components import render_header, render_sidebar_filters, apply_filters, render_footer
-from summary_dashboard import render_summary_dashboard
-from visualization import render_visualization_analysis
-from data_overview import render_data_overview
+from modules.data_loader import load_data
+from modules.ui_components import render_header, render_sidebar_filters, apply_filters, render_footer
+from pages.summary_dashboard import render_summary_dashboard
+from pages.visualization import render_visualization_analysis
+from pages.data_overview import render_data_overview
 
 # ========== PAGE CONFIGURATION ==========
 st.set_page_config(
