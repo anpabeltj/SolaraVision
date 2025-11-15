@@ -17,8 +17,8 @@ def load_data():
         tuple: (generation_data, weather_data, merged_df)
     """
     # Load CSV files
-    generation_data = pd.read_csv('Plant_1_Generation_Data.csv')
-    weather_data = pd.read_csv('Plant_1_Weather_Sensor_Data.csv')
+    generation_data = pd.read_csv('data/Plant_1_Generation_Data.csv')
+    weather_data = pd.read_csv('data/Plant_1_Weather_Sensor_Data.csv')
 
     # Convert datetime columns
     generation_data['DATE_TIME'] = pd.to_datetime(
