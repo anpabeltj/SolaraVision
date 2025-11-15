@@ -6,7 +6,7 @@ Renders interactive visualizations and analysis charts
 import streamlit as st
 import plotly.express as px
 from datetime import datetime
-from export_utils import export_dataframe_to_csv
+from modules.export_utils import export_dataframe_to_csv
 
 
 def render_visualization_analysis(filtered_df):
