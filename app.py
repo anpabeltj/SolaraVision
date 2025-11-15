@@ -12,7 +12,8 @@ from views.data_overview import render_data_overview
 
 # ========== PAGE CONFIGURATION ==========
 st.set_page_config(
-    page_title="☀SolaraVision",
+    page_title="SolaraVision",
+    page_icon="☀",
     layout="wide",
 )
 
