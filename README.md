@@ -77,7 +77,7 @@ SolaraVision/
 │   ├── export_utils.py                      # Export functions
 │   └── ui_components.py                     # UI elements
 │
-├── 📁 pages/                                # Dashboard pages
+├── 📁 views/                                # Dashboard views
 │   ├── summary_dashboard.py                 # Summary page
 │   ├── visualization.py                     # Charts page
 │   └── data_overview.py                     # Data exploration page
