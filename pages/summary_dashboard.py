@@ -7,9 +7,9 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from datetime import datetime
-from kpi_calculator import calculate_kpis
-from export_utils import export_dataframe_to_csv
-from ui_components import render_kpi_card
+from modules.kpi_calculator import calculate_kpis
+from modules.export_utils import export_dataframe_to_csv
+from modules.ui_components import render_kpi_card
 
 
 def render_summary_dashboard(filtered_df):
