@@ -40,7 +40,7 @@ def _render_daily_trend(filtered_df):
         labels={'AC_POWER': 'Total AC Power (kW)', 'DATE': 'Date'},
         markers=True
     )
-    st.plotly_chart(fig_daily, use_container_width=True)
+    st.plotly_chart(fig_daily, width='stretch')
     
     # Export button
     col1, col2 = st.columns([3, 1])
@@ -69,7 +69,7 @@ def _render_hourly_pattern(filtered_df):
         labels={'AC_POWER': 'Average AC Power (kW)', 'HOUR': 'Hour of Day'},
         markers=True
     )
-    st.plotly_chart(fig_hourly, use_container_width=True)
+    st.plotly_chart(fig_hourly, width='stretch')
     
     # Export button
     col1, col2 = st.columns([3, 1])
@@ -97,7 +97,7 @@ def _render_monthly_trend(filtered_df):
         title="Monthly AC Power Generation",
         labels={'AC_POWER': 'Total AC Power (kW)', 'MONTH_NAME': 'Month'},
     )
-    st.plotly_chart(fig_month, use_container_width=True)
+    st.plotly_chart(fig_month, width='stretch')
     
     # Export button
     col1, col2 = st.columns([3, 1])
@@ -133,7 +133,7 @@ def _render_weather_analysis(filtered_df):
         },
         trendline="ols"
     )
-    st.plotly_chart(fig_weather, use_container_width=True)
+    st.plotly_chart(fig_weather, width='stretch')
     
     # Export button
     col1, col2 = st.columns([3, 1])
@@ -162,7 +162,7 @@ def _render_inverter_performance(filtered_df):
         title="Total AC Power by Inverter",
         labels={'SOURCE_KEY': 'Inverter ID', 'AC_POWER': 'Total AC Power (kW)'},
     )
-    st.plotly_chart(fig_inverter, use_container_width=True)
+    st.plotly_chart(fig_inverter, width='stretch')
     
     # Export button
     col1, col2 = st.columns([3, 1])
@@ -198,7 +198,7 @@ def _render_efficiency_analysis(filtered_df):
         },
         trendline="ols"
     )
-    st.plotly_chart(fig_efficiency, use_container_width=True)
+    st.plotly_chart(fig_efficiency, width='stretch')
     
     # Export button
     col1, col2 = st.columns([3, 1])

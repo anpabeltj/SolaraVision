@@ -110,7 +110,7 @@ def _render_quick_insights(filtered_df):
             labels={'AC_POWER': 'AC Power (kWh)', 'DATE': 'Date'}
         )
         fig_daily_mini.update_layout(height=300)
-        st.plotly_chart(fig_daily_mini, use_container_width=True)
+        st.plotly_chart(fig_daily_mini, width='stretch')
         
     with col2:
         # Efficiency distribution
@@ -122,7 +122,7 @@ def _render_quick_insights(filtered_df):
             nbins=30
         )
         fig_eff_dist.update_layout(height=300)
-        st.plotly_chart(fig_eff_dist, use_container_width=True)
+        st.plotly_chart(fig_eff_dist, width='stretch')
 
 
 def _render_export_section(filtered_df, kpis):

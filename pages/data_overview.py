@@ -48,7 +48,7 @@ def _render_dataset_overview(generation_data, weather_data):
         st.write(list(generation_data.columns))
     
         st.write("**Sample Data:**")
-        st.dataframe(generation_data.head(100), use_container_width=True)
+        st.dataframe(generation_data.head(100), width='stretch')
         
         # Export button
         csv_gen = export_dataframe_to_csv(generation_data)
@@ -69,7 +69,7 @@ def _render_dataset_overview(generation_data, weather_data):
         st.write(list(weather_data.columns))
 
         st.write("**Sample Data:**")
-        st.dataframe(weather_data.head(100), use_container_width=True)
+        st.dataframe(weather_data.head(100), width='stretch')
         
         # Export button
         csv_weather = export_dataframe_to_csv(weather_data)
@@ -123,7 +123,7 @@ def _render_merged_data(generation_data, weather_data, merged_df):
         st.metric("Merged Records", f"{len(merged_df):,}")
 
     st.write("**Sample of Merged Data:**")
-    st.dataframe(merged_df.head(100), use_container_width=True)
+    st.dataframe(merged_df.head(100), width='stretch')
     
     # Export button
     csv_merged = export_dataframe_to_csv(merged_df)
