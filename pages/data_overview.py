@@ -5,7 +5,7 @@ Renders data overview and exploration interface
 
 import streamlit as st
 from datetime import datetime
-from export_utils import export_dataframe_to_csv
+from modules.export_utils import export_dataframe_to_csv
 
 
 def render_data_overview(generation_data, weather_data, merged_df):
